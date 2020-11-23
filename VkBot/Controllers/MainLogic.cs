@@ -126,7 +126,6 @@ namespace VkBot.Controllers
                 if (FindMaxLevel(Users[id].context) <= Users[id].CurrentLevel)
                 {
                     CommandBody(Users[id].context, x);
-                    CreateUser(x, false);
                 }
                 else
                 {
@@ -135,35 +134,18 @@ namespace VkBot.Controllers
             }
             else
             {
-                CreateUser(x, false);
                 SendMessage("Некорректный ввод", peerId);
             }
-            //SendMessage("текущий уровень: " + dialogs[id].CurrentLevel + " максимальный уровень: " + FindMaxLevel(dialogs[id].context), x.PeerId.Value);
         }
 
-        private void CreateUser(Message msg, bool Created)
-        {
-            if (Created)
-            {
-                Users.Add(msg.UserId.Value, new User());
-                Console.WriteLine("Добавил долбоёба");
-            }
-            else
-            {
-                Users[msg.UserId.Value] = null;
-                Users.Remove(msg.UserId.Value);
-                Console.WriteLine("Убрал долбоёба");
-            }
-
-        }
         private void Run(Message msg)
         {
-            CreateUser(msg, true);
+            if(!Users.ContainsKey(msg.FromId.Value))
+                Users.Add(msg.FromId.Value, new User());
 
             if (commands.ContainsKey(msg.Text.ToLower()) && 
                 Users[msg.FromId.Value].CurrentLevel == Level.Zero)
                 commands[msg.Text.ToLower()].Invoke(msg);
-
             else if(Users[msg.FromId.Value].CurrentLevel > Level.Zero)
                 ContextAnswer(msg);
         }
