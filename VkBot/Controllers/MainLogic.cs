@@ -164,6 +164,27 @@ namespace VkBot.Controllers
             else if(Users[msg.FromId.Value].CurrentLevel > Level.Zero)
                 ContextAnswer(msg);
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         }
 
         private void Debug(Message msg)
