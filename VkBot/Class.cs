@@ -7,6 +7,6 @@ namespace VkBot
 {
     public class Class
     {
-
+        //игнат ты долбаёб
     }
 }
