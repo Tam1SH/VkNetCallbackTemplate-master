@@ -141,17 +141,20 @@ namespace VkBot.Controllers
             //SendMessage("текущий уровень: " + dialogs[id].CurrentLevel + " максимальный уровень: " + FindMaxLevel(dialogs[id].context), x.PeerId.Value);
         }
 
-        private void CreateUser(Message msg, bool IsCreated)
+        private void CreateUser(Message msg, bool Created)
         {
-            if (IsCreated)
+            if (Created)
             {
                 Users.Add(msg.UserId.Value, new User());
+                Console.WriteLine("Добавил долбоёба");
             }
             else
             {
                 Users[msg.UserId.Value] = null;
                 Users.Remove(msg.UserId.Value);
+                Console.WriteLine("Убрал долбоёба");
             }
+
         }
         private void Run(Message msg)
         {
@@ -163,28 +166,6 @@ namespace VkBot.Controllers
 
             else if(Users[msg.FromId.Value].CurrentLevel > Level.Zero)
                 ContextAnswer(msg);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         }
 
         private void Debug(Message msg)
