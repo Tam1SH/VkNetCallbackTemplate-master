@@ -145,6 +145,7 @@ namespace VkBot.Controllers
                 scriptScope.SetVariable("text", result);
                 engine.ExecuteFile(@"/app/Python/PythonHandler.py", scriptScope);
                 SendMessage(_text.Body[Users[source.FromId.Value].key] + result, source.PeerId.Value);
+
             }
             catch (Exception ex)
             {
@@ -165,6 +166,7 @@ namespace VkBot.Controllers
                 scriptScope.SetVariable("text", "15.02.21");
                 engine.ExecuteFile(@"/app/Python/PythonHandler.py", scriptScope);
                 SendMessage(result, pizda.PeerId.Value);
+                Console.WriteLine(result);
             }
             catch (Exception ex)
             {
