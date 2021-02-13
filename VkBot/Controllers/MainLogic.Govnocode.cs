@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using IronPython.Compiler;
 using IronPython;
+using IronPdf;
 using Microsoft.Scripting.Hosting;
 using IronPython.Hosting;
 using System.IO;
@@ -13,6 +14,7 @@ using System.Reflection;
 using System.CodeDom;
 using VkNet.Model.Attachments;
 using System.Net;
+using System.Drawing;
 
 namespace VkBot.Controllers
 {
@@ -161,7 +163,12 @@ namespace VkBot.Controllers
                 var engine = Python.CreateEngine();
                 ScriptScope scriptScope = engine.CreateScope();
                 string result = null;
-                Action<string> action = y => result = y;
+                Action action = () =>
+                {
+                    var pdf = PdfDocument.FromFile("/app/VkBot/infile.pdf");
+                    Bitmap[] pageImages = pdf.ToBitmap();
+                    pageImages[0].Save("/app/VkBot/o1utfile.png");
+                };
                 scriptScope.SetVariable("pizdec", action);
                 scriptScope.SetVariable("text", "15.02.21");
                 engine.ExecuteFile(@"/app/Python/PythonHandler.py", scriptScope);

@@ -26,17 +26,10 @@ def PIZDA(text,pizdec):
         f.write(pizda)
         f.close()
 
-        pdffile = "/app/VkBot/file.pdf"
-        
-        doc = fitz.open(pdffile)
-        page = doc.loadPage(0)  # number of page
-        pix = page.getPixmap()
-        output = "/app/VkBot/outfile.png"
-        pix.writePNG(output)
+        pizdec.Invoke()
 
         group_id = '200286651'
         access_token = '8195f5251b143964f6085ddff9b4251e9b2cdf33c95ca17d6c8681bf98688f26af13dc4b9d3d71443d1e3'
-        filename = output
 
         vk.VERSION = '5.50'
         session = vk.Session(access_token=access_token)
@@ -45,7 +38,7 @@ def PIZDA(text,pizdec):
 
         upload_url = vk_api.photos.getMessagesUploadServer(group_id=group_id, v = '5.50')['upload_url']
 
-        request = requests.post(upload_url, files={'photo': open(filename, "rb")})
+        request = requests.post(upload_url, files={'photo': open("/app/VkBot/outfile.png", "rb")})
         params = {'server': request.json()['server'],
                   'photo': request.json()['photo'],
                   'hash': request.json()['hash'],
