@@ -21,7 +21,7 @@ def CallBack(__x__,__y__):
 def PIZDA(text,pizdec):
     try:
         pizda  = urllib.request.urlopen('https://narfu.ru/sf/stc/forstud/rasp/15.02.21-O.pdf').read()
-        f = open("/app/VkBot/file.pdf", "wb")
+        f = open("/app/VkBot/infile.pdf", "wb")
         f.write(pizda)
         f.close()
 
