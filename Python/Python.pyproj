@@ -13,7 +13,7 @@
     <OutputPath>.</OutputPath>
     <Name>Python</Name>
     <RootNamespace>PythonApplication1</RootNamespace>
-    <InterpreterId>Global|PythonCore|3.9</InterpreterId>
+    <InterpreterId>Global|PythonCore|3.7</InterpreterId>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -24,8 +24,7 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <InterpreterReference Include="Global|PythonCore|3.9" />
-    <InterpreterReference Include="Global|VisualStudio|Lib" />
+    <InterpreterReference Include="Global|PythonCore|3.7" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="PythonHandler.py" />
