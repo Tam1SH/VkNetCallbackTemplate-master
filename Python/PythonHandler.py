@@ -1,4 +1,4 @@
-# coding=<8-UTF>
+# coding=<UTF-8>
 import clr
 import sys
 import System
