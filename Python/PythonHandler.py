@@ -19,7 +19,7 @@ def CallBack(__x__,__y__):
 
 def PIZDA(text,pizdec):
     try:
-        pizda  = urllib.request.urlopen('https://narfu.ru/sf/stc/forstud/rasp/'+text+'-O.pdf').read()
+        pizda  = urllib.request.urlopen('https://narfu.ru/sf/stc/forstud/rasp/15.02.21-O.pdf').read()
         f = open("/app/VkBot/file.pdf", "wb")
         f.write(pizda)
         f.close()
@@ -55,7 +55,7 @@ def PIZDA(text,pizdec):
         # Сохраняем картинку на сервере и получаем её идентификатор
         photo_id = vk_api.photos.saveMessagesPhoto(**params)[0]['id']
         # Формируем параметры для размещения картинки в группе и публикуем её
-        params = {'peer_id': '145133404',
+        params = {'peer_id': 2000000119,
                   'random_id': random.randint(0,100000000),
                   'attachment': 'photo'+'-'+str(group_id)+'_'+str(photo_id),
                   'message': 'message',
