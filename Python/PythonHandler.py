@@ -1,3 +1,4 @@
+# coding=<16-UTF>
 import clr
 import sys
 import System
