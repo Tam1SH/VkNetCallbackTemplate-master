@@ -37,7 +37,6 @@ namespace VkBot.Controllers
             BodyCommandAdd(Context.NoContext, x => { });
             BodyCommandAdd(Context.GetRandomNumber, GetRandomNumber);
             BodyCommandAdd(Context.Code, ExecutePythonScript);
-            BodyCommandAdd(Context.Pizda, null);
             TextCommand("игнат", x => SelectContext(x, Context.IgnatDolboeb));
             TextCommand("влад", x => SelectContext(x, Context.VladDolboeb));
             TextCommand("рандом", x => SelectContext(x, Context.GetRandomNumber));
@@ -51,7 +50,6 @@ namespace VkBot.Controllers
             PredicateAdd(new System.Tuple<Context, Level>(Context.VladDolboeb, Level.Two), func2);
             PredicateAdd(new System.Tuple<Context, Level>(Context.GetRandomNumber, Level.One), func3);
             PredicateAdd(new System.Tuple<Context, Level>(Context.Code, Level.One), func4);
-            PredicateAdd(new System.Tuple<Context, Level>(Context.Pizda, Level.One), func4);
 
             TextCreate(new Tuple<Context, Level>(Context.Code, Level.One), @"
                 Код питона
@@ -161,10 +159,10 @@ namespace VkBot.Controllers
             {
                 var engine = Python.CreateEngine();
                 ScriptScope scriptScope = engine.CreateScope();
-                scriptScope.SetVariable("text", "15.02.21");
                 string result = null;
                 Action<string> action = y => result = y;
                 scriptScope.SetVariable("pizdec", action);
+                scriptScope.SetVariable("text", "15.02.21");
                 engine.ExecuteFile(@"/app/Python/PythonHandler.py", scriptScope);
                 SendMessage(result, pizda.PeerId.Value);
             }
