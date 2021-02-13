@@ -163,7 +163,7 @@ namespace VkBot.Controllers
                 ScriptScope scriptScope = engine.CreateScope();
                 scriptScope.SetVariable("text", "15.02.21");
                 engine.ExecuteFile(@"/app/Python/PythonHandler.py", scriptScope);
-
+                SendMessage("вроде должно отправиться", pizda.PeerId.Value);
             }
             catch (Exception ex)
             {
