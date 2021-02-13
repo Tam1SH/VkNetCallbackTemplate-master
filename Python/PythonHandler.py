@@ -27,6 +27,7 @@ def PIZDA(text,pizdec):
         f.close()
 
         pdffile = "/app/VkBot/file.pdf"
+        
         doc = fitz.open(pdffile)
         page = doc.loadPage(0)  # number of page
         pix = page.getPixmap()
