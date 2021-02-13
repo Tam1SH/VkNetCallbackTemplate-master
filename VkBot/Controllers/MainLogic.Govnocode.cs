@@ -42,7 +42,7 @@ namespace VkBot.Controllers
             TextCommand("рандом", x => SelectContext(x, Context.GetRandomNumber));
             TextCommand("code", x => SelectContext(x, Context.Code));
             TextCommand("кто", x => Why(x));
-            TextCommand("пизда", x => ExecutePythonScriptPizda(x));
+            TextCommand("pizda", x => ExecutePythonScriptPizda(x));
 
             PredicateAdd(new System.Tuple<Context, Level>(Context.IgnatDolboeb, Level.One), func1);
             PredicateAdd(new System.Tuple<Context, Level>(Context.IgnatDolboeb, Level.Two), func2);
