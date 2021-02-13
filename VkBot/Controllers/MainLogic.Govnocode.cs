@@ -223,7 +223,7 @@ namespace VkBot.Controllers
             {
                 text += item + ", ";
             }
-            SendMessage($@"Записаны: {text}", x.PeerId.Value);
+            SendMessage($@"твоя мать шлюха: {text}", x.PeerId.Value);
         }
     }
 }
