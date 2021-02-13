@@ -60,7 +60,5 @@ def PIZDA(text):
     vk_api.messages.send(**params)
     print('photo'+'-'+str(group_id)+'_'+str(photo_id))
 
-if act != None:
-    CallBack(act,text) 
-if text != None:
-    PIZDA(text)
+
+PIZDA(text)
