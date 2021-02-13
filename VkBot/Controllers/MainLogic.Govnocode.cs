@@ -164,7 +164,7 @@ namespace VkBot.Controllers
                 scriptScope.SetVariable("text", "15.02.21");
                 string result = null;
                 Action<string> action = y => result = y;
-                scriptScope.SetVariable("act", action);
+                scriptScope.SetVariable("pizdec", action);
                 engine.ExecuteFile(@"/app/Python/PythonHandler.py", scriptScope);
                 SendMessage(result, pizda.PeerId.Value);
             }
