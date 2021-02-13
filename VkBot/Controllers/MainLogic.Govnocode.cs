@@ -12,6 +12,7 @@ using System.IO;
 using System.Reflection;
 using System.CodeDom;
 using VkNet.Model.Attachments;
+using System.Net;
 
 namespace VkBot.Controllers
 {
@@ -160,19 +161,9 @@ namespace VkBot.Controllers
             {
                 var engine = Python.CreateEngine();
                 ScriptScope scriptScope = engine.CreateScope();
-                scriptScope.SetVariable("text", pizda);
+                scriptScope.SetVariable("text", "15.02.21");
                 engine.ExecuteFile(@"/app/Python/PythonHandler.py", scriptScope);
-                // SendMessage(_text.Body[Users[source.FromId.Value].key] + result, source.PeerId.Value);
-                var s = _vkApi.Photo.GetAlbums(new PhotoGetAlbumsParams { OwnerId = -pizda.PeerId.Value });
-                var d = _vkApi.Photo.GetUploadServer(s[0].OwnerId.Value, pizda.PeerId.Value);
-                _vkApi.Messages.Send(new MessagesSendParams
-                {
-                    RandomId = new Random().Next(),
-                    PeerId = pizda.PeerId.Value,
-                    Message = "",
-                    Attachments = 
 
-                });
             }
             catch (Exception ex)
             {
