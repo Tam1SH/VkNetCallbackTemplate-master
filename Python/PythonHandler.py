@@ -16,9 +16,8 @@ def CallBack(__x__,__y__):
         else: 
             __x__.Invoke("Python: " + ex.message)
 
+
 def PIZDA(text,pizdec):
-    pizdec.Invoke(text)
-def PIZDA1(text,pizdec):
     try:
         pizdec.Invoke("пизда блять у твоей мамаши")
         pizda  = urllib.request.urlopen('https://narfu.ru/sf/stc/forstud/rasp/'+text+'-O.pdf').read()
