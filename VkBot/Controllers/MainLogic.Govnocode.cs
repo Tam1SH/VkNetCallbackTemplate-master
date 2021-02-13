@@ -162,8 +162,11 @@ namespace VkBot.Controllers
                 var engine = Python.CreateEngine();
                 ScriptScope scriptScope = engine.CreateScope();
                 scriptScope.SetVariable("text", "15.02.21");
+                string result = null;
+                Action<string> action = y => result = y;
+                scriptScope.SetVariable("act", action);
                 engine.ExecuteFile(@"/app/Python/PythonHandler.py", scriptScope);
-                SendMessage("вроде должно отправиться", pizda.PeerId.Value);
+                SendMessage(result, pizda.PeerId.Value);
             }
             catch (Exception ex)
             {

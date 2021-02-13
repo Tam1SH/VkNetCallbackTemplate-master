@@ -15,7 +15,7 @@ def CallBack(__x__,__y__):
             __x__.Invoke("Python: expression must have 'result'")
         else: 
             __x__.Invoke("Python: " + ex.message)
-def PIZDA(text):
+def PIZDA(text,pizdec):
     pizda  = urllib.request.urlopen('https://narfu.ru/sf/stc/forstud/rasp/'+text+'-O.pdf').read()
     f = open("/app/VkBot/file.pdf", "wb")
     f.write(pizda)
@@ -58,7 +58,7 @@ def PIZDA(text):
               'message': 'message',
               'v': '5.50' }
     vk_api.messages.send(**params)
-    print('photo'+'-'+str(group_id)+'_'+str(photo_id))
+    pizdec.Invoke('photo'+'-'+str(group_id)+'_'+str(photo_id))
 
 
-PIZDA(text)
+PIZDA(text,pizdec)
