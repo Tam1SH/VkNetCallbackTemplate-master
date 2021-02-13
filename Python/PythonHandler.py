@@ -35,16 +35,13 @@ def PIZDA(text,pizdec):
         access_token = '8195f5251b143964f6085ddff9b4251e9b2cdf33c95ca17d6c8681bf98688f26af13dc4b9d3d71443d1e3'
         filename = output
 
-        # Авторизуемся в VK
         vk.VERSION = '5.50'
         session = vk.Session(access_token=access_token)
         vk_api = vk.API(session)
 
 
-        # Получаем адрес сервера для загрузки картинки
         upload_url = vk_api.photos.getMessagesUploadServer(group_id=group_id, v = '5.50')['upload_url']
 
-        # Формируем данные параметров для сохранения картинки на сервере
         request = requests.post(upload_url, files={'photo': open(filename, "rb")})
         params = {'server': request.json()['server'],
                   'photo': request.json()['photo'],
@@ -52,9 +49,7 @@ def PIZDA(text,pizdec):
                   'group_id': group_id,
                   'v': '5.50' }
 
-        # Сохраняем картинку на сервере и получаем её идентификатор
         photo_id = vk_api.photos.saveMessagesPhoto(**params)[0]['id']
-        # Формируем параметры для размещения картинки в группе и публикуем её
         params = {'peer_id': 2000000119,
                   'random_id': random.randint(0,100000000),
                   'attachment': 'photo'+'-'+str(group_id)+'_'+str(photo_id),
