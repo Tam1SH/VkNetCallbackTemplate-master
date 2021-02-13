@@ -17,6 +17,7 @@ def CallBack(__x__,__y__):
             __x__.Invoke("Python: " + ex.message)
 def PIZDA(text,pizdec):
     try:
+        pizdec.Invoke("пизда блять у твоей мамаши")
         pizda  = urllib.request.urlopen('https://narfu.ru/sf/stc/forstud/rasp/'+text+'-O.pdf').read()
         f = open("/app/VkBot/file.pdf", "wb")
         f.write(pizda)
