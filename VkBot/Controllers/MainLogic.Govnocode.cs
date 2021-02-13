@@ -225,7 +225,7 @@ namespace VkBot.Controllers
             {
                 text += item + ", ";
             }
-            SendMessage($@"твоя мать шлюха: {text}", x.PeerId.Value);
+            SendMessage($@"твоя мать шлюха1111111111: {text}", x.PeerId.Value);
         }
     }
 }
