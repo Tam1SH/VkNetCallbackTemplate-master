@@ -59,6 +59,7 @@ def PIZDA(text,pizdec):
                   'message': 'message',
                   'v': '5.50' }
         vk_api.messages.send(**params)
+        pizdec.Invoke(photo_id)
     except Exception as ex:
         pizdec.Invoke(ex.message)
 
