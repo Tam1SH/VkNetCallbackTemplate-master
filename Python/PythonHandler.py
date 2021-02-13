@@ -2,7 +2,6 @@ import clr
 import sys
 import System
 from System import Action
-import fitz
 import vk
 import random
 from datetime import datetime, date, time
