@@ -10,7 +10,7 @@ namespace VkBot.Controllers
     {
         private enum Context
         {
-            NoContext, IgnatDolboeb, VladDolboeb, GetRandomNumber, Code
+            NoContext, IgnatDolboeb, VladDolboeb, GetRandomNumber, Code, Pizda
         }
         private enum Level
         {

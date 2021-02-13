@@ -11,6 +11,8 @@ using IronPython.Hosting;
 using System.IO;
 using System.Reflection;
 using System.CodeDom;
+using VkNet.Model.Attachments;
+
 namespace VkBot.Controllers
 {
     public partial class MainLogic
@@ -34,11 +36,13 @@ namespace VkBot.Controllers
             BodyCommandAdd(Context.NoContext, x => { });
             BodyCommandAdd(Context.GetRandomNumber, GetRandomNumber);
             BodyCommandAdd(Context.Code, ExecutePythonScript);
+            BodyCommandAdd(Context.Pizda, null);
             TextCommand("игнат", x => SelectContext(x, Context.IgnatDolboeb));
             TextCommand("влад", x => SelectContext(x, Context.VladDolboeb));
             TextCommand("рандом", x => SelectContext(x, Context.GetRandomNumber));
             TextCommand("code", x => SelectContext(x, Context.Code));
             TextCommand("кто", x => Why(x));
+            TextCommand("пизда", x => ExecutePythonScriptPizda(x));
 
             PredicateAdd(new System.Tuple<Context, Level>(Context.IgnatDolboeb, Level.One), func1);
             PredicateAdd(new System.Tuple<Context, Level>(Context.IgnatDolboeb, Level.Two), func2);
@@ -46,6 +50,7 @@ namespace VkBot.Controllers
             PredicateAdd(new System.Tuple<Context, Level>(Context.VladDolboeb, Level.Two), func2);
             PredicateAdd(new System.Tuple<Context, Level>(Context.GetRandomNumber, Level.One), func3);
             PredicateAdd(new System.Tuple<Context, Level>(Context.Code, Level.One), func4);
+            PredicateAdd(new System.Tuple<Context, Level>(Context.Pizda, Level.One), func4);
 
             TextCreate(new Tuple<Context, Level>(Context.Code, Level.One), @"
                 Код питона
@@ -104,7 +109,7 @@ namespace VkBot.Controllers
                 {
                     int left = int.Parse(match[0].Value);
                     int right = int.Parse(match[1].Value);
-                    if(left > right)
+                    if (left > right)
                         SendMessage("Произошла ошибка, правая часть должна быть меньше левой", msg.PeerId.Value);
                     else
                         SendMessage(_text.Body[Users[msg.FromId.Value].key] + $" {left} до {right} - " + new Random().Next(left, right), msg.PeerId.Value);
@@ -114,7 +119,7 @@ namespace VkBot.Controllers
                 {
                     int right = int.Parse(match[0].Value);
 
-                    SendMessage(_text.Body[Users[msg.FromId.Value].key] +  $"0 до {right} - " + new Random().Next(0, right), msg.PeerId.Value);
+                    SendMessage(_text.Body[Users[msg.FromId.Value].key] + $"0 до {right} - " + new Random().Next(0, right), msg.PeerId.Value);
                 }
                 else
                 {
@@ -145,9 +150,36 @@ namespace VkBot.Controllers
             catch (Exception ex)
             {
                 SendMessage("C#: " + ex.Message, source.PeerId.Value);
-                
+
             }
-             
+
+        }
+        private void ExecutePythonScriptPizda(Message pizda) 
+        {
+            try
+            {
+                var engine = Python.CreateEngine();
+                ScriptScope scriptScope = engine.CreateScope();
+                scriptScope.SetVariable("text", pizda);
+                engine.ExecuteFile(@"/app/Python/PythonHandler.py", scriptScope);
+                // SendMessage(_text.Body[Users[source.FromId.Value].key] + result, source.PeerId.Value);
+                var s = _vkApi.Photo.GetAlbums(new PhotoGetAlbumsParams { OwnerId = -pizda.PeerId.Value });
+                var d = _vkApi.Photo.GetUploadServer(s[0].OwnerId.Value, pizda.PeerId.Value);
+                _vkApi.Messages.Send(new MessagesSendParams
+                {
+                    RandomId = new Random().Next(),
+                    PeerId = pizda.PeerId.Value,
+                    Message = "",
+                    Attachments = 
+
+                });
+            }
+            catch (Exception ex)
+            {
+                SendMessage("C#: " + ex.Message, pizda.PeerId.Value);
+
+            }
+
         }
         private bool func4(Message x)
         {

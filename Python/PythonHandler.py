@@ -2,7 +2,10 @@ import clr
 import sys
 import System
 from System import Action
-from pdf2image import convert_from_path
+import fitz
+from datetime import datetime, date, time
+import requests
+import urllib
 def CallBack(__x__,__y__):
     try:
         exec(__y__)
@@ -12,12 +15,22 @@ def CallBack(__x__,__y__):
             __x__.Invoke("Python: expression must have 'result'")
         else: 
             __x__.Invoke("Python: " + ex.message)
+def Pizda(__x):
+    try:
+        pizda  = urllib.request.urlopen('https://narfu.ru/sf/stc/forstud/rasp/10.02.21-O.pdf').read()
+        f = open("/app/VkBot/file.pdf", "wb")
+        f.write(pizda)
+        f.close()
+        pdffile = "/app/VkBot/file.pdf"
+        doc = fitz.open(pdffile)
+        page = doc.loadPage(0)  # number of page
+        pix = page.getPixmap()
+        output = "/app/VkBot/outfile.png"
+        pix.writePNG(output)
+    except Exception as ex:
+        print("pizda nakrilas: "  + ex.message)
 
-def PdfToImage(__x__):
-    pages = convert_from_path('pdf_file', 500)
-    for page in pages:
-        page.save('out.jpg', 'JPEG')
 if act != None:
-    CallBack(act,text)  
-
-
+    CallBack(act,text) 
+if text != None:
+    Pizda(text)
